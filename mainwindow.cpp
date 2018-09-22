@@ -1,7 +1,10 @@
+//************//v1.0*************//
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QUrl>
 #include <QWebEngineView>
+#include <QWebEngineSettings>
 #include <QDesktopWidget>
 #include <QRect>
 #include <QString>
@@ -36,10 +39,11 @@ void MainWindow::OpenQQwebButtonSlot()
 {
     QDesktopWidget *deskdop = QApplication::desktop();
     QWebEngineView * QQweb = new QWebEngineView;
+
     QQweb->load(QUrl("https://w.qq.com/"));
     QQweb->show();
-    QQweb->setMaximumSize(500,809);
-    QQweb->setMinimumSize(500,809);
+    QQweb->setMaximumSize(1040,642.72);
+    QQweb->setMinimumSize(1040,642.72);
     QQweb->move((deskdop->width() - this->width())/2,(deskdop->height() - this->height())/2);
 
     this->hide();
