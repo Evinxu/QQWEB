@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QWebEngineView>
+#include "swebengineview.h"
 
 namespace Ui {
 class MainWindow;
@@ -14,14 +16,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-private slots:
-    void OpenQQwebButtonSlot();
-
-    void quitButtonSlot();
+protected:
+    void resizeEvent(QResizeEvent *);
 
 private:
     Ui::MainWindow *ui;
+    SWebEngineView* QQweb = Q_NULLPTR;
 };
 
 #endif // MAINWINDOW_H
