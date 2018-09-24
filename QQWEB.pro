@@ -8,6 +8,8 @@ QT       += core gui
 
 QT += webenginewidgets
 
+Qt += network
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,10 +30,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    swebengineview.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    swebengineview.h
 
 FORMS += \
         mainwindow.ui
