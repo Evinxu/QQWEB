@@ -22,10 +22,8 @@ QWebEngineView *SWebEngineView::createWindow(QWebEnginePage::WebWindowType type)
 {
     qDebug()<<"open a new page";
 
-    SWebEngineView *popup = new SWebEngineView;
-    popup->setAttribute(Qt::WA_DeleteOnClose);
-    popup->show();
-    return popup;
-    //    return this;
-
+    SWebEngineView *webView = new SWebEngineView;
+    webView->setAttribute(Qt::WA_DeleteOnClose);
+    webView->show();
+    return webView;
 }

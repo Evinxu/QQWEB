@@ -8,20 +8,18 @@
 #include <QDesktopWidget>
 #include <QRect>
 #include <QString>
-#include <QImage>
-#include <QPixmap>
-#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QString url = "https://w.qq.com/";
 
     QQweb = new SWebEngineView(this);
-    QUrl url = QUrl("https://w.qq.com/");
-    QQweb->load(url);
-    QQweb->addItemUrl(url);
+    QUrl QQurl = QUrl(url);
+    QQweb->load(QQurl);
+    QQweb->addItemUrl(QQurl);
     QQweb->show();
 
     //    this->setWindowFlags(Qt::FramelessWindowHint);
