@@ -8,7 +8,7 @@ QT       += core gui
 
 QT += webenginewidgets
 
-Qt += network
+QT += network
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
