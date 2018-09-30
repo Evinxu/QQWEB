@@ -1,11 +1,11 @@
 #include "swebengineview.h"
 #include <QDebug>
-#include <QWebEngineSettings>
 #include <QString>
 #include <mainwindow.h>
 
 SWebEngineView::SWebEngineView(QWidget *parent) : QWebEngineView(parent)
 {
+
 }
 
 QList<QUrl> SWebEngineView::listUrl() const
@@ -27,3 +27,4 @@ QWebEngineView *SWebEngineView::createWindow(QWebEnginePage::WebWindowType type)
     webView->show();
     return webView;
 }
+

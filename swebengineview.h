@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QWebEngineView>
-#include <QMouseEvent>
+#include <QWebEngineSettings>
 
 class SWebEngineView : public QWebEngineView
 {
@@ -19,10 +19,11 @@ protected:
      * @param type
      * @return
      */
-  QWebEngineView *createWindow(QWebEnginePage::WebWindowType type);
+    QWebEngineView *createWindow(QWebEnginePage::WebWindowType type);
 private:
     QList<QUrl> m_listUrl;
 
 };
 
 #endif // SWEBENGINEVIEW_H
+

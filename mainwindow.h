@@ -5,6 +5,7 @@
 #include <QWebEngineView>
 #include <QWebEngineDownloadItem>
 #include <QWebEngineProfile>
+#include <QWebEngineSettings>
 #include "swebengineview.h"
 
 namespace Ui {
@@ -25,16 +26,14 @@ protected:
 signals:
     void downloadRequested(QWebEngineDownloadItem *softdownload);
 
-    void dataChanged(qint64,qint64);
-
 private slots:
-    void downloadJumpSlot(QWebEngineDownloadItem *softdownload);
+    void downloadJumpSlot(QWebEngineDownloadItem *startdownload);
 
     void setCurrentProgressSlot(qint64 bytesreceived,qint64 bytestotal);
 
 private:
     Ui::MainWindow *ui;
-    SWebEngineView* QQweb = Q_NULLPTR;
+    SWebEngineView *QQweb = Q_NULLPTR;
 };
 
 #endif // MAINWINDOW_H
