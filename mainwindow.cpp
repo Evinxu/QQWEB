@@ -59,7 +59,7 @@ void MainWindow::setCurrentProgressSlot(qint64 bytesreceived,qint64 bytestotal)
     QMessageBox *box = new QMessageBox;
     QTimer::singleShot(10*100,box,SLOT(close()));   //box information延迟1S
 
-    qDebug()<<"bytesreceived value is:"<<bytesreceived;   //jia jindutiao zaixiegeSLOT bujiale
+    qDebug()<<"bytesreceived value is:"<<bytesreceived;   //jia jindutiao zaixiegeSLOT bujiale...
     qDebug()<<"bytestotal value is:"<<bytestotal;
 
     if(bytesreceived == bytestotal)
