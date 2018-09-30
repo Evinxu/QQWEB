@@ -5,15 +5,21 @@
 #include <QUrl>
 #include <QWebEngineView>
 #include <QWebEngineSettings>
+#include <QtWebChannel/QtWebChannel>
 #include <QDesktopWidget>
 #include <QRect>
 #include <QString>
+#include <QtWebEngineWidgets/QWebEngineSettings>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+    QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::PluginsEnabled,true);
+
     QString url = "https://w.qq.com/";
 
     QQweb = new SWebEngineView(this);
@@ -22,11 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QQweb->addItemUrl(QQurl);
     QQweb->show();
 
-    //    this->setWindowFlags(Qt::FramelessWindowHint);
-    //    this->setAttribute(Qt::WA_TranslucentBackground, true);
-
-    this->setMaximumSize(1040,642.72);
-    this->setMinimumSize(1040,642.72);
+    this->setMaximumSize(1060,642.72);
+    this->setMinimumSize(1060,642.72);
     QDesktopWidget *deskdop = QApplication::desktop();
     move((deskdop->width() - this->width())/2, (deskdop->height() - this->height())/2);
 
