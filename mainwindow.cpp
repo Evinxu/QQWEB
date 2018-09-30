@@ -5,11 +5,11 @@
 #include <QUrl>
 #include <QWebEngineView>
 #include <QWebEngineSettings>
-#include <QtWebChannel/QtWebChannel>
 #include <QDesktopWidget>
-#include <QRect>
 #include <QString>
 #include <QtWebEngineWidgets/QWebEngineSettings>
+#include <QMessageBox>
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent):
     ui->setupUi(this);
 
     QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
-    QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::PluginsEnabled,true);
+    QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::PluginsEnabled,true);   //支持 flash
 
     QString url = "https://w.qq.com/";
 
@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent):
     QDesktopWidget *deskdop = QApplication::desktop();
     move((deskdop->width() - this->width())/2, (deskdop->height() - this->height())/2);
 
+    QObject::connect(QQweb->page()->profile(),&QWebEngineProfile::downloadRequested,this,&MainWindow::downloadJumpSlot);   //下载
+
 }
 
 MainWindow::~MainWindow()
@@ -43,4 +45,39 @@ MainWindow::~MainWindow()
 void MainWindow::resizeEvent(QResizeEvent *)
 {
     QQweb->resize(this->size());
+}
+
+///////////////**************//////////////////下载操作
+void MainWindow::downloadJumpSlot(QWebEngineDownloadItem*softdownload)
+{
+    qDebug()<<"download test!";
+    softdownload->accept();
+    QObject::connect(softdownload,SIGNAL(downloadProgress(qint64,qint64)),this,SLOT(setCurrentProgressSlot(qint64,qint64)));
+}
+
+void MainWindow::setCurrentProgressSlot(qint64 bytesreceived,qint64 bytestotal)
+{
+    emit dataChanged(bytesreceived,bytestotal);
+    QMessageBox *box = new QMessageBox;
+    QTimer::singleShot(10*100,box,SLOT(close()));   //box information延迟1S
+
+    qDebug()<<"bytesreceived value is:"<<bytesreceived;
+    qDebug()<<"bytestotal value is:"<<bytestotal;
+
+    if(bytesreceived == bytestotal)
+    {
+        box->setWindowTitle("successed");
+        box->setText("download completed!");
+        box->show();
+
+        //        QMessageBox::information(NULL,"successed","download completed!");
+        qDebug()<<"download is ok!";
+    }else if(bytesreceived == 0)
+    {
+        box->setWindowTitle("start");
+        box->setText("downloading...");
+        box->show();
+        //        QMessageBox::information(NULL,"start","downloading...");
+        qDebug()<<"downloading...";
+    }
 }

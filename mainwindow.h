@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QWebEngineView>
+#include <QWebEngineDownloadItem>
+#include <QWebEngineProfile>
 #include "swebengineview.h"
 
 namespace Ui {
@@ -16,8 +18,19 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 protected:
     void resizeEvent(QResizeEvent *);
+
+signals:
+    void downloadRequested(QWebEngineDownloadItem *softdownload);
+
+    void dataChanged(qint64,qint64);
+
+private slots:
+    void downloadJumpSlot(QWebEngineDownloadItem *softdownload);
+
+    void setCurrentProgressSlot(qint64 bytesreceived,qint64 bytestotal);
 
 private:
     Ui::MainWindow *ui;
